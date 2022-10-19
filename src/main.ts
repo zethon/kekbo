@@ -1,15 +1,30 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 
-function createWindow() {
+function createWindow() 
+{
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
-    width: 800,
+  const mainWindow = new BrowserWindow(
+    {
+      height: 600,
+      width: 800,
+      show: false,
+      webPreferences: 
+      {
+        preload: path.join(__dirname, "preload.js"),
+        // devTools: false
+      },
   });
+
+  const {app} = require('electron');
+
+  mainWindow.once('ready-to-show', () =>
+    {
+      console.log("FOLDER: " + app.getPath('userData'));
+
+      mainWindow.setPosition(10,10);
+      mainWindow.show();
+    });
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
@@ -34,8 +49,10 @@ app.on("ready", () => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
+app.on("window-all-closed", () => 
+{
+  if (process.platform !== "darwin") 
+  {
     app.quit();
   }
 });
