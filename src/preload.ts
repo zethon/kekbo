@@ -1,10 +1,28 @@
+import { contextBridge, ipcMain, ipcRenderer } from 'electron';
+import * as appversion from '../dist/appversion';
 
-import { contextBridge, ipcRenderer } from 'electron';
-import * as appversion from './appversion';
-
-contextBridge.exposeInMainWorld('versions', { value : "1.1.2" });
 contextBridge.exposeInMainWorld('appversion', appversion);
-console.log(appversion.version());
+
+let sendSubmit = (data: any) =>
+{
+    console.log("Send Submit: " + data);
+    ipcRenderer.send("connectbtn-clicked", data);
+    ipcRenderer.on("msg-from-main", (event, data) =>
+    {
+        console.log("message from main received!!: " + data);
+    });
+};
+
+let indexBridge = 
+{
+    sendSubmit: sendSubmit
+};
+
+contextBridge.exposeInMainWorld("Bridge", indexBridge);
+
+// contextBridge.exposeInMainWorld('versions', { value : "1.1.2" });
+// 
+// console.log(appversion.version());
 
 // ipcRenderer.addListener("connectbtn-clicked", () =>
 // {

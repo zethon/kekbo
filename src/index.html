@@ -8,6 +8,16 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">    <link rel="stylesheet" href="../src/styles.css">
     <title>Document</title>
+
+    <!-- <script>
+        const { ipcRenderer } = require('electron')
+        function shareData()
+        {
+            console.log("SHARE DATA");
+            ipcRenderer.send('share-data', 'Hello from renderer process')
+        }
+    </script> -->
+
 </head>
 
 <body>
@@ -15,8 +25,20 @@
     <h1>My First Webpack App</h1>
     <div id="root"></div>
 
+    <!-- <script>
+        window.api.receive("fromMain", (data) => 
+        {
+            console.log(`Received ${data} from main process`);
+        });
+        
+        window.api.send("toMain", "some data");
+    </script> -->
+
     <button id="connectbtn">Connect</button>
-    <script src="../dist/renderer.js"></script>
+    <script defer src="../dist/renderer.js"></script>
+    <!-- <script>
+        require("../dist/renderer.js");
+    </script> -->
 </body>
 
 </html>

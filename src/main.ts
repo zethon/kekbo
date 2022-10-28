@@ -10,20 +10,15 @@ const createWindow = (): void =>
         titleBarOverlay: true,
         webPreferences:
         {
+            contextIsolation: true,
+            nodeIntegration: false,
             preload: path.join(__dirname, "preload.js"),
-            nodeIntegration: true,
-            devTools: true
         }
     });
 
     win.loadFile('../src/index.html');
     win.webContents.openDevTools();
 }
-
-ipcMain.on("connectbtn-clicked", (event, data) =>
-{
-    console.log("even received!");
-});
 
 app.on('ready', () =>
 {
@@ -49,4 +44,10 @@ app.on("window-all-closed", () =>
     {
         app.quit();
     }
+});
+
+ipcMain.on("connectbtn-clicked", (event, data) =>
+{
+    console.log("event received!");
+    event.reply("msg-from-main", "Hello from main!");
 });

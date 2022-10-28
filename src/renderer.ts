@@ -7,8 +7,8 @@
  
 // import { ipcRenderer } from 'electron';
 
-console.log("rendered file5: " + (window as any).versions.value);
-console.log("appversion!!: " + (window as any).appversion.version());
+// console.log("rendered file5: " + (window as any).versions.value);
+// console.log("appversion!!: " + (window as any).appversion.version());
 
 let appdiv = document.getElementById("apptitle");
 appdiv.innerHTML = "App Version: " + (window as any).appversion.version();
@@ -17,8 +17,7 @@ let connectbtn = document.getElementById("connectbtn");
 connectbtn.addEventListener("click", () => 
 {
     console.log("connectbtn clicked");
-    // ipcRenderer.send("connectbtn-clicked", "this is data");
-    (<any>window).api.send("connectbtn-clicked", "this is data");
+    (window as any).Bridge.sendSubmit("test");
 });
 
 // let mqtt = (window as any).mqtt;
