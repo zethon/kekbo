@@ -4,3 +4,69 @@
 // nodeIntegration is set to true in webPreferences.
 // Use preload.js to selectively enable features
 // needed in the renderer process.
+ 
+// import { ipcRenderer } from 'electron';
+
+console.log("rendered file5: " + (window as any).versions.value);
+console.log("appversion!!: " + (window as any).appversion.version());
+
+let appdiv = document.getElementById("apptitle");
+appdiv.innerHTML = "App Version: " + (window as any).appversion.version();
+
+let connectbtn = document.getElementById("connectbtn");
+connectbtn.addEventListener("click", () => 
+{
+    console.log("connectbtn clicked");
+    // ipcRenderer.send("connectbtn-clicked", "this is data");
+    (<any>window).api.send("connectbtn-clicked", "this is data");
+});
+
+// let mqtt = (window as any).mqtt;
+
+// const options = {
+//     // Clean session
+//     clean: true,
+//     connectTimeout: 4000,
+//     // Auth
+//     clientId: 'emqx_test',
+//     username: 'emqx_test',
+//     password: 'emqx_test',
+//   }
+//   const client  = mqtt.connect('mqtt://broker.emqx.io:1883', options)
+// client.on('connect', function () {
+//     console.log('Connected')
+//     client.subscribe('test', function() 
+//     {
+//       console.log('Subscribed')
+//     })
+//   })
+
+// // const mqtt = require('mqtt')
+// // import * as mqtt from "mqtt"
+// const options = {
+//   // Clean session
+//   clean: true,
+//   connectTimeout: 4000,
+//   // Auth
+//   clientId: 'emqx_test',
+//   username: 'emqx_test',
+//   password: 'emqx_test',
+// }
+// const client  = mqtt.connect('mqtt://broker.emqx.io:1883', options)
+
+// console.log(JSON.stringify(client));
+
+// client.on('connect', function () {
+//   console.log('Connected')
+//   client.subscribe('test', function() 
+//   {
+//     console.log('Subscribed')
+//   })
+// })
+
+// client.on('message', function (topic:string, message:string) {
+//   // message is Buffer
+//   console.log(message.toString())
+//   client.end()
+// })
+

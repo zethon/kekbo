@@ -1,0 +1,21 @@
+:root
+{
+    --red: #ea5e5e;
+    --yellow: #f7ba3e;
+    --blue: #56b3b4;
+    --purple: #bf85bf;
+    --gray: #334651;
+    --unit: 10px;
+}
+
+html, body
+{
+    background-color: var(--gray);
+    margin: 0; 
+    -webkit-app-region: drag;
+}
+
+.titlebar {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+  }
