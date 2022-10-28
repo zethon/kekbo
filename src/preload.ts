@@ -1,7 +1,12 @@
-import { contextBridge, ipcMain, ipcRenderer } from 'electron';
-import * as appversion from '../dist/appversion';
+import { contextBridge, ipcMain, ipcRenderer, app } from 'electron';
 
-contextBridge.exposeInMainWorld('appversion', appversion);
+const process = require('process');
+console.log("Current working directory: ", process.cwd());
+
+// https://github.com/electron/electron/issues/35587
+// import * as appversion from 'appversion';
+
+// contextBridge.exposeInMainWorld('appversion', appversion);
 
 let sendSubmit = (data: any) =>
 {

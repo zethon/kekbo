@@ -4,14 +4,9 @@
 // nodeIntegration is set to true in webPreferences.
 // Use preload.js to selectively enable features
 // needed in the renderer process.
- 
-// import { ipcRenderer } from 'electron';
 
-// console.log("rendered file5: " + (window as any).versions.value);
-// console.log("appversion!!: " + (window as any).appversion.version());
-
-let appdiv = document.getElementById("apptitle");
-appdiv.innerHTML = "App Version: " + (window as any).appversion.version();
+// let appdiv = document.getElementById("apptitle");
+// appdiv.innerHTML = "App Version: " + (window as any).appversion.version();
 
 let connectbtn = document.getElementById("connectbtn");
 connectbtn.addEventListener("click", () => 

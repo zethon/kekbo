@@ -3,17 +3,22 @@ import * as path from "path";
 
 const createWindow = (): void => 
 {
-    let win = new BrowserWindow({
+    let win = new BrowserWindow(
+    {
         width: 800,
         height: 600,
         titleBarStyle: 'hidden',
-        titleBarOverlay: true,
+        title: "ElectricOwl!",
         webPreferences:
         {
+            worldSafeExecuteJavaScript: true,
             contextIsolation: true,
             nodeIntegration: false,
             preload: path.join(__dirname, "preload.js"),
-        }
+        },
+
+        // @ts-ignore: This gives an error on Windows, but it works fine.
+        titleBarOverlay: true,
     });
 
     win.loadFile('../src/index.html');

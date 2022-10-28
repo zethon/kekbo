@@ -6,5 +6,3 @@ export var version = () =>
 {
     return `${major}.${minor}.${patch}`;
 };
-
-
