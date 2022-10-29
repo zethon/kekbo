@@ -10,7 +10,7 @@
 
 html, body
 {
-    background-color: var(--gray);
+    background-color: var(--yellow);
     margin: 0; 
     -webkit-app-region: drag;
 }

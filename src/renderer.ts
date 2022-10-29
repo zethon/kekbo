@@ -21,3 +21,13 @@ sendmsgbtn.addEventListener("click", () =>
     console.log("sendmsgbtn clicked");
     (window as any).Bridge.sendMessage("test123");
 });
+
+// (window as any).ipcRender.receive = (channel:string, data:any) =>
+// {
+//     console.log("ipcRender.receive: " + channel + " " + JSON.stringify(data));
+// }
+// @ts-ignore: This gives an error on Windows, but it works fine.
+(window as any).api.recieve("main-to-render", (data) =>
+{
+    console.log("message from main received!!: " + data);
+});

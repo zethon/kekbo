@@ -1,10 +1,12 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, ipcRenderer } from 'electron';
 import * as path from "path";
 import * as mqtt from 'mqtt';
 
+let mainWindow: BrowserWindow;
+
 const createWindow = (): void => 
 {
-    let win = new BrowserWindow(
+    mainWindow = new BrowserWindow(
     {
         width: 800,
         height: 600,
@@ -21,8 +23,8 @@ const createWindow = (): void =>
         titleBarOverlay: true,
     });
 
-    win.loadFile('../src/index.html');
-    win.webContents.openDevTools();
+    mainWindow.loadFile('../src/index.html');
+    mainWindow.webContents.openDevTools();
 }
 
 app.on('ready', () =>
@@ -84,8 +86,10 @@ ipcMain.on("connectbtn-clicked", (event, data) =>
     
     client.on('message', function (topic:string, message:string) 
     {
-        console.log("topic: " + topic);
-        console.log("message: " + message.toString());
+        console.log("(FROM MAIN) topic: " + topic);
+        console.log("(FROM MAIN) message: " + message.toString());
+        let packet = { topic: topic, message: message };
+        mainWindow.webContents.send("main-to-render", "data");
     });
 });
 
