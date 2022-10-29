@@ -51,57 +51,49 @@ app.on("window-all-closed", () =>
     }
 });
 
-// let client : mqtt.MqttClient;
-const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
-let client = mqtt.connect('mqtt://localhost:9099',
-{
-    clientId: clientId,
-    clean: true,
-    connectTimeout: 4000,
-    username: 'emqx',
-    password: 'public',
-    reconnectPeriod: 1000,
-});
-
-client.on('connect', () =>
-{
-    console.log("Connected to MQTT broker!");
-    // event.reply("msg-from-main", "Connected to MQTT from main!!");
-
-    client.subscribe('test', function() 
-    {
-        console.log('Subscribed');
-    });
-
-    client.publish('test', 'Hello mqtt from inside the callback!', () =>
-    {
-        console.log("-----------------------------");
-        console.log(client);
-        console.log("-----------------------------");
-    });
-});
-
-client.on('message', function (topic:string, message:string) 
-{
-    // message is Buffer
-    console.log("topic: " + topic);
-    console.log("message: " + message.toString());
-    // client.end()
-});
+let client : mqtt.MqttClient;
 
 ipcMain.on("connectbtn-clicked", (event, data) =>
 {
-    // console.log(client);
-    // console.log("event received!");
-    // event.reply("msg-from-main", "Hello from main!");
+    const clientId = `owl_mqtt_${Math.random().toString(16).slice(3)}`
+    client = mqtt.connect('mqtt://localhost:9099',
+    {
+        clientId: clientId,
+        clean: true,
+        connectTimeout: 4000,
+        username: 'emqx',
+        password: 'public',
+        reconnectPeriod: 1000,
+    });
+
+    client.on('connect', () =>
+    {
+        console.log("Connected to MQTT broker!");
+        // event.reply("msg-from-main", "Connected to MQTT from main!!");
+    
+        client.subscribe('test_topic', function() 
+        {
+            console.log('Subscribed');
+        });
+    
+        client.publish('test_topic', 'Hello mqtt from inside the callback!', () =>
+        {
+            console.log('Connect callback message Published');
+        });
+    });
+    
+    client.on('message', function (topic:string, message:string) 
+    {
+        console.log("topic: " + topic);
+        console.log("message: " + message.toString());
+    });
 });
 
 ipcMain.on("sendmsgbtn-clicked", (event, data) =>
 {
-    console.log(client);
     console.log("sendmsgbtn-clicked event received!");
-    client.publish('test', 'Hello mqtt from a public variable!', () =>
+    client.publish('test_topic', 'Hello mqtt from a public variable!', () =>
     {
-        console.log('Other Message Sent');
+        console.log('Button message Published');
     });
 });
