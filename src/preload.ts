@@ -14,9 +14,16 @@ let sendSubmit = (data: any) =>
     });
 };
 
+let sendMessage = (data: any) =>
+{
+    console.log("Send Submit: " + data);
+    ipcRenderer.send("sendmsgbtn-clicked", data);
+};
+
 let indexBridge = 
 {
     sendSubmit: sendSubmit,
+    sendMessage: sendMessage
 };
 
 contextBridge.exposeInMainWorld("Bridge", indexBridge);

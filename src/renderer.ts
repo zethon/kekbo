@@ -14,3 +14,10 @@ connectbtn.addEventListener("click", () =>
     console.log("connectbtn clicked");
     (window as any).Bridge.sendSubmit("test");
 });
+
+let sendmsgbtn = document.getElementById("sendmsgbtn");
+sendmsgbtn.addEventListener("click", () => 
+{
+    console.log("sendmsgbtn clicked");
+    (window as any).Bridge.sendMessage("test123");
+});
