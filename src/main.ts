@@ -8,8 +8,8 @@ const createWindow = (): void =>
 {
     mainWindow = new BrowserWindow(
     {
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 800,
         titleBarStyle: 'hidden',
         title: "ElectricOwl!",
         webPreferences:
@@ -78,18 +78,18 @@ ipcMain.on("connectbtn-clicked", (event, data) =>
             console.log('Subscribed');
         });
     
-        client.publish('test_topic', 'Hello mqtt from inside the callback!', () =>
-        {
-            console.log('Connect callback message Published');
-        });
+        // client.publish('test_topic', 'Hello mqtt from inside the callback!', () =>
+        // {
+        //     console.log('Connect callback message Published');
+        // });
     });
     
     client.on('message', function (topic:string, message:string) 
     {
-        console.log("(FROM MAIN) topic: " + topic);
-        console.log("(FROM MAIN) message: " + message.toString());
-        let packet = { topic: topic, message: message };
-        mainWindow.webContents.send("main-to-render", "data");
+        console.log(`(SENDING FROM MAIN) topic  : '${topic}'`);
+        console.log(`(SENDING FROM MAIN) message: '${message}'`);
+        // let packet = { topic: topic, message: message };
+        mainWindow.webContents.send("main-to-render", topic, message);
     });
 });
 

@@ -35,9 +35,8 @@ contextBridge.exposeInMainWorld("api",
     send: (channel, data) => ipcRenderer.send(channel, data),
     // @ts-ignore: This gives an error on Windows, but it works fine.
     recieve: (channel, func) => ipcRenderer.on(
-        channel,
-        (event, ...args) => func(args)
-    )
+        channel, args => func(args))
+        // channel, (event, ...args) => func(args))
 })
 
 

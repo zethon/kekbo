@@ -27,7 +27,8 @@ sendmsgbtn.addEventListener("click", () =>
 //     console.log("ipcRender.receive: " + channel + " " + JSON.stringify(data));
 // }
 // @ts-ignore: This gives an error on Windows, but it works fine.
-(window as any).api.recieve("main-to-render", (data) =>
+(window as any).api.recieve("main-to-render", (topic, data) =>
 {
-    console.log("message from main received!!: " + data);
+    console.log("TOPIC: " + topic);
+    console.log("DATA: " + data);
 });
