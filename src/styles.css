@@ -5,11 +5,12 @@
 	--color-dark: #2c2f33;
 	--color-lighter-dark: #45494e;
 	--color-full-white: #ffffff;
-	--color-grey-white: #B9BBBE;
+	--color-grey-white: #dfe0e2;
 	--color-grey-dark: #242629;
 	--color-actually-black: #000000;
 	--color-fantastic-green: #00ae7a;
 }
+
 
 .titlebar 
 {
@@ -27,10 +28,11 @@ body
     min-height: 100vh;
     margin: 0;
 	
-    /* -webkit-app-region: drag; */
+    -webkit-app-region: drag;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar 
+{
     display: none;
 }
 
@@ -40,36 +42,28 @@ body::-webkit-scrollbar {
     top: 0;
     bottom: 0;
     overflow-y: scroll;
-    width: 100%;
+	overflow-x: hidden;
+    width: 80px;
+}
+
+.side-bar::-webkit-scrollbar 
+{
+    width: 0;
+    background: transparent;
 }
 
 .main-container
 {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 80px 1fr;
 	overflow: hidden;
 	min-height: 100vh;
-	background-color: red !important;
-}
-
-.left-hand-side
-{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    overflow-y: scroll;
-	width: 100%;
-	overflow: hidden;
-}
-
-.left-hand-side::-webkit-scrollbar 
-{
-	display: none;
 }
 
 .center-panel
 {
-	background-color: green !important;
+	background-color: var(--color-lighter-dark);
+	padding: 5px;
 }
 
 .squircles
