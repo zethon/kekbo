@@ -15,7 +15,6 @@
 .titlebar 
 {
     -webkit-user-select: none;
-    /* -webkit-app-region: drag; */
 }
 
 body
@@ -27,8 +26,6 @@ body
     color: var(--color-full-white);
     min-height: 100vh;
     margin: 0;
-	
-    /* -webkit-app-region: drag; */
 }
 
 body::-webkit-scrollbar 
@@ -38,7 +35,6 @@ body::-webkit-scrollbar
 
 .left-panel
 {
-    display: grid;
 	grid-template-rows: 1fr 1fr;
 	min-height: 100vh;
 }
@@ -46,7 +42,8 @@ body::-webkit-scrollbar
 .side-spacer
 {
 	background: var(--color-not-quite-black);
-	min-height: 10vh;;
+	min-height: 10vh;
+	-webkit-app-region: drag;
 }
 
 .side-bar
